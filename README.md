@@ -29,7 +29,7 @@ Follow these steps to set up your environment, build the project, and flash it t
 ### 1. Clone this Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/pico_w.git
+git clone https://github.com/Damz04/pico_w.git
 cd pico_w
 
 ```

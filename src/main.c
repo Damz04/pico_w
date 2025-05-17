@@ -9,6 +9,7 @@
 #include "wifi.h"
 #include "mqtt.h"
 
+// Define pins for components
 #define TRIG_PIN 14
 #define ECHO_PIN 15
 #define SOUND_SPEED 343 // Speed of sound in m/s
@@ -19,8 +20,9 @@
 #define BUZZER_PIN 5
 
 int main() {
-    stdio_init_all();
-    sleep_ms(3000);
+    stdio_init_all();                                // Initialize standard I/O (for printf, etc.)
+    sleep_ms(3000);                                  // Wait for peripherals to initialize
+
 
     printf("Entering main program...\n");
 
@@ -30,7 +32,8 @@ int main() {
 
     sleep_ms(5000);
 
-    if (!connect_to_wifi("Skynet", "Stockholm18")) {
+    // Attempt to connect to Wi-Fi. Replace with your own wifi credentials:
+    if (!connect_to_wifi("wifi-ssid", "wifi-password")) {  
         return 1;
     }
 
@@ -38,12 +41,14 @@ int main() {
     setup_mqtt_client(&client);
 
     extern volatile bool alarm_synced;
-
+    
+    // Wait for MQTT connection to be established
     while (!mqtt_connected) {
         printf("Waiting for MQTT connection...\n");
         sleep_ms(500);
     }
-
+    
+    // Wait for alarm state to be synced with MQTT broker
     while (!alarm_synced) {
         printf("Waiting for alarm state sync...\n");
         sleep_ms(500);

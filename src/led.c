@@ -3,10 +3,12 @@
 #include "buzzer.h"
 #include "mqtt.h"
 
+// Define GPIO pins for each LED
 #define GREEN_LED 2
 #define BLUE_LED 3
 #define RED_LED 4
 
+// Initialize LED pins as outputs
 void init_leds() {
     gpio_init(GREEN_LED);
     gpio_set_dir(GREEN_LED, GPIO_OUT);
@@ -16,12 +18,14 @@ void init_leds() {
     gpio_set_dir(RED_LED, GPIO_OUT);
 }
 
+// Set the state of each LED individually (1 = ON, 0 = OFF)
 void set_led_state(int green, int blue, int red) {
     gpio_put(GREEN_LED, green);
     gpio_put(BLUE_LED, blue);
     gpio_put(RED_LED, red);
 }
 
+// Update LEDs and buzzer based on distance measured
 void update_leds_and_buzzer(float distance_m) {
      if (!alarm_enabled) {
         set_led_state(0, 0, 0);

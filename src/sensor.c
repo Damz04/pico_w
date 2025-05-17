@@ -1,10 +1,12 @@
 #include "pico/stdlib.h"
 #include "sensor.h"
 
+// Define GPIO pins for ultrasonic sensor
 #define TRIG_PIN 14
 #define ECHO_PIN 15
 #define SOUND_SPEED 343
 
+// Initialize ultrasonic sensor pins
 void init_ultrasonic_sensor() {
     gpio_init(TRIG_PIN);
     gpio_init(ECHO_PIN);
@@ -13,6 +15,7 @@ void init_ultrasonic_sensor() {
     gpio_put(TRIG_PIN, 0);
 }
 
+// Measure distance using ultrasonic sensor
 float measure_distance() {
     gpio_put(TRIG_PIN, 1);
     sleep_us(10);

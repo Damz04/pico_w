@@ -1,3 +1,5 @@
-build/
-buildmqtt/
-buildsensor/
+build*/
+lib/lcd_1602_i2c.c
+pico-sdk/
+src/lcd.c
+src/lcd.h

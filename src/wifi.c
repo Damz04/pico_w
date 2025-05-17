@@ -3,9 +3,11 @@
 #include "pico/stdlib.h"
 #include "wifi.h"
 
-#define WIFI_MAX_RETRIES 2
-#define WIFI_RETRY_DELAY_MS 5000
+// Configuration constants
+#define WIFI_MAX_RETRIES 2                                    // Maximum number of connection attempts
+#define WIFI_RETRY_DELAY_MS 5000                              // Delay between retries (in milliseconds)
 
+// Connect to a Wi-Fi network using the provided SSID and password
 bool connect_to_wifi(const char *ssid, const char *pass) {
     if (cyw43_arch_init()) {
         printf("Wi-Fi init failed\n");

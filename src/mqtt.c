@@ -3,12 +3,13 @@
 #include "mqtt.h"
 #include <stdbool.h>
 
+// Global flags to track MQTT connection and alarm state
 volatile bool mqtt_connected = false;
 volatile bool alarm_enabled = true;
 volatile bool alarm_synced = false;
 
 
-
+// MQTT client configuration structure
 static const struct mqtt_connect_client_info_t mqtt_client_info = {
     .client_id   = "pi",
     .client_user = NULL,
@@ -20,6 +21,7 @@ static const struct mqtt_connect_client_info_t mqtt_client_info = {
     .will_retain = 0
 };
 
+// Callback after a publish attempt (success or failure)
 static void mqtt_publish_cb(void *arg, err_t result) {
     if (result == ERR_OK) {
         printf("Publish successful.\n");
@@ -28,11 +30,13 @@ static void mqtt_publish_cb(void *arg, err_t result) {
     }
 }
 
+// Called when connection to MQTT broker is established or fails
 static void mqtt_connection_cb(mqtt_client_t *client, void *arg, mqtt_connection_status_t status) {
     if (status == MQTT_CONNECT_ACCEPTED) {
         printf("MQTT connected successfully.\n");
         mqtt_connected = true;
-
+        
+        // Subscribe to topic to receive alarm state updates
         err_t err = mqtt_subscribe(client, "device/alarm", 1, NULL, NULL);
         if (err != ERR_OK) {
             printf("❌ Failed to subscribe to device/alarm: %d\n", err);
@@ -83,6 +87,7 @@ static void mqtt_incoming_data_cb(void *arg, const u8_t *data, u16_t len, u8_t f
     }
 }
 
+// Create and configure MQTT client, initiate connection
 void setup_mqtt_client(mqtt_client_t **client) {
     ip_addr_t broker_ip;
     IP4_ADDR(&broker_ip, 192, 168, 1, 70);
@@ -97,6 +102,7 @@ void setup_mqtt_client(mqtt_client_t **client) {
     mqtt_set_inpub_callback(*client, mqtt_incoming_publish_cb, mqtt_incoming_data_cb, NULL);
 }
 
+// Publish the measured distance to the MQTT topic
 void publish_distance(mqtt_client_t *client, float distance) {
     if (!mqtt_connected) {
         printf("MQTT client not connected\n");
