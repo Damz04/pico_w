@@ -1,7 +1,0 @@
-/home/damaris/pico/wifi/buildb/pioasm/CMakeFiles/pioasm.dir
-/home/damaris/pico/wifi/buildb/pioasm/CMakeFiles/edit_cache.dir
-/home/damaris/pico/wifi/buildb/pioasm/CMakeFiles/rebuild_cache.dir
-/home/damaris/pico/wifi/buildb/pioasm/CMakeFiles/list_install_components.dir
-/home/damaris/pico/wifi/buildb/pioasm/CMakeFiles/install.dir
-/home/damaris/pico/wifi/buildb/pioasm/CMakeFiles/install/local.dir
-/home/damaris/pico/wifi/buildb/pioasm/CMakeFiles/install/strip.dir

@@ -1,5 +1,0 @@
-/home/damaris/pico/wifi/buildx/pioasm-install/pioasm/pioasm
-/home/damaris/pico/wifi/buildx/pioasm-install/pioasm/pioasmTargets.cmake
-/home/damaris/pico/wifi/buildx/pioasm-install/pioasm/pioasmTargets-release.cmake
-/home/damaris/pico/wifi/buildx/pioasm-install/pioasm/pioasmConfig.cmake
-/home/damaris/pico/wifi/buildx/pioasm-install/pioasm/pioasmConfigVersion.cmake
