@@ -47,7 +47,7 @@ dashboard host) over MQTT via Wi-Fi. Below is a breakdown of its responsibilitie
 
 ---
 
-## 🚀 How to Set Up and Build
+## How to Set Up and Build
 
 Follow these steps to set up your environment, build the project, and flash it to the Pico W.
 
@@ -92,7 +92,7 @@ sudo apt install cmake build-essential picotool
 
 ```
 
-## 🛠️ Build the Project
+## Build the Project
 
 From the root of the project folder:
 
@@ -106,7 +106,7 @@ make
 
 After building, you should see a .uf2 file in the build/ directory — this is the firmware file you’ll flash to the Pico W.
 
-## 🔌 Flash the Firmware to the Pico W
+## Flash the Firmware to the Pico W
 
 1. Press and hold the BOOTSEL button on your Pico W.
 
@@ -118,7 +118,7 @@ After building, you should see a .uf2 file in the build/ directory — this is t
 
 The device will reboot and begin running the firmware.
 
-## 📡 Network & MQTT Notes
+## Network & MQTT Notes
 
 The Pico W must be configured with valid Wi-Fi credentials in the code (edit with your own Wi-Fi credentials before building).
 
