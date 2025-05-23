@@ -1,24 +1,49 @@
-# 🏠 Raspberry Pi Pico W – Home Alarm System
+# Home Alarm System on Raspberry Pi Zero 2 W and Pico W
 
-This repository contains the firmware for a home alarm system using a Raspberry Pi Pico W. The device uses an ultrasonic distance sensor to detect proximity, communicates with a backend over MQTT, and activates a buzzer and LEDs based on alarm status and distance thresholds.
+## Overview
 
----
+This project is a real-time sensor-based alarm monitoring system developed using Flask,
+MQTT, SQLite, Javascript, C, and Pushover notification service. It is deployed on a Raspberry
+Pi Zero 2 W and includes both a frontend dashboard and a backend system to monitor
+distance data from a connected device (Raspberry Pico W) and trigger alerts when objects
+get too close. This repository holds the code for the Raspberry Pico W.
 
-## 📋 Project Description
+## Raspberry Pi Pico W Functionality
 
-This code is for a home alarm setup using a Raspberry Pi Pico W connected to an ultrasonic sensor, a buzzer, and some LED lights. It measures distance using the sensor and passes the result on through MQTT to the backend running on a Raspberry Pi Zero 2 W.
+The Raspberry Pi Pico W in this project functions as the sensor interface and IoT edge
+device. It handles real-time distance measurements using an ultrasonic sensor and
+communicates with the Raspberry Pi Zero 2 W (which acts as the backend server and
+dashboard host) over MQTT via Wi-Fi. Below is a breakdown of its responsibilities:
 
-- If the **alarm is enabled** from the frontend:
-  - When something gets within **50 cm**:
-    - The **buzzer beeps intermittently**
-    - The **blue LED** turns on
-  - When something gets within **20 cm**:
-    - The **alarm is triggered**
-    - The **buzzer sounds continuously**
-    - The **red LED** turns on
-    - A **Pushover notification** is triggered in the backend
+### 1. Ultrasonic Sensor Integration:
+ - The Pico W reads distance values using a TRIG and ECHO pin setup.
+ - It calculates the time delay to determine the distance to an object in meters.
 
-> For further explanation of the backend functionality, see the corresponding repository.
+### 2. Wi-Fi Connectivity:
+ - The Pico W connects to a predefined Wi-Fi network using the CYW43 driver.
+ - It retries connection attempts and prints IP information on success.
+
+### 3. MQTT Communication:
+ - On successful Wi-Fi connection, the Pico initializes an MQTT client.
+ - It publishes:
+ - motion/distance: Regular distance readings.
+ - device/status: "online" on startup and "offline" as a will message.
+ - It subscribes to:
+ - device/alarm: To receive and update the current alarm state.
+ - device/alarm/request: To trigger a state synchronization with the server.
+
+### 4. LED and Buzzer Feedback:
+ - Based on the measured distance, the Pico W controls:
+ - Green LED: Safe distance.
+ - Blue LED and intermittent buzzing: Medium range (warning).
+ - Red LED and continous buzzing: Danger zone (object is too close).
+ - If the alarm is disabled, all outputs are turned off.
+
+### 5. Alarm Synchronization:
+ - At startup, the Pico W requests the current alarm state.
+ - On receiving "on" or "off" via MQTT, it updates its local flag to control response behavior.
+
+> To view the repository for the Raspberry Pi Zero 2 W, follow this url: https://github.com/Damz04/pi_zero
 
 ---
 
